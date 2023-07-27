@@ -1,0 +1,31 @@
+#!/bin/bash
+
+form=rf
+maxt=120
+
+for bal in 0 1
+do
+  for cap in 1.5 1.75 2.00
+  do
+    for fixsize in 2 3 4
+    do
+      for freeint in 2 3 4
+      do
+        echo "instance;NR;NT;NW;capacity;balanced;fixsizerf;freeintervalrf;maxtimerf;bestsol;elapsedtime" >> saida.txt
+        julia threeplsp.jl --inst instances/N50T15/N50T15P1W15DD_SF4.dat --form ${form} --capacity ${cap} --balanced ${bal} --maxtimerf ${maxt} --fixsizerf ${fixsize} --freeintervalrf ${freeint} >> report/bal${bal}_cap${cap}_form${form}_fixsize${fixsize}_freeint${freeint}_N50T15P1W15DD_SF4.txt
+        #julia threeplsp.jl --inst instances/N50T15/N50T15P1W20SD_SF1.dat --form ${form} --capacity ${cap} --balanced ${bal} --maxtimerf ${maxt} --fixsizerf ${fixsize} --freeintervalrf ${freeint} >> report/bal${bal}_cap${cap}_form${form}_fixsize${fixsize}_freeint${freeint}_N50T15P1W20SD_SF1.txt
+        #julia threeplsp.jl --inst instances/N50T30/N50T30P1W5SD_DF3.dat --form ${form} --capacity ${cap} --balanced ${bal} --maxtimerf ${maxt} --fixsizerf ${fixsize} --freeintervalrf ${freeint} >> report/bal${bal}_cap${cap}_form${form}_fixsize${fixsize}_freeint${freeint}_N50T30P1W5SD_DF3.txt
+        #julia threeplsp.jl --inst instances/N50T30/N50T30P1W10DD_DF10.dat --form ${form} --capacity ${cap} --balanced ${bal} --maxtimerf ${maxt} --fixsizerf ${fixsize} --freeintervalrf ${freeint} >> report/bal${bal}_cap${cap}_form${form}_fixsize${fixsize}_freeint${freeint}_N50T30P1W10DD_DF10.txt
+        julia threeplsp.jl --inst instances/N100T15/N100T15P1W5DD_SF5.dat --form ${form} --capacity ${cap} --balanced ${bal} --maxtimerf ${maxt} --fixsizerf ${fixsize} --freeintervalrf ${freeint} >> report/bal${bal}_cap${cap}_form${form}_fixsize${fixsize}_freeint${freeint}_N100T15P1W5DD_SF5.txt
+        #julia threeplsp.jl --inst instances/N100T15/N100T15P1W10SD_SF9.dat --form ${form} --capacity ${cap} --balanced ${bal} --maxtimerf ${maxt} --fixsizerf ${fixsize} --freeintervalrf ${freeint} >> report/bal${bal}_cap${cap}_form${form}_fixsize${fixsize}_freeint${freeint}_N100T15P1W10SD_SF9.txt
+        #julia threeplsp.jl --inst instances/N100T30/N100T30P1W10SD_DF6.dat --form ${form} --capacity ${cap} --balanced ${bal} --maxtimerf ${maxt} --fixsizerf ${fixsize} --freeintervalrf ${freeint} >> report/bal${bal}_cap${cap}_form${form}_fixsize${fixsize}_freeint${freeint}_N100T30P1W10SD_DF6.txt
+        julia threeplsp.jl --inst instances/N100T30/N100T30P1W20DD_SF9.dat --form ${form} --capacity ${cap} --balanced ${bal} --maxtimerf ${maxt} --fixsizerf ${fixsize} --freeintervalrf ${freeint} >> report/bal${bal}_cap${cap}_form${form}_fixsize${fixsize}_freeint${freeint}_N100T30P1W20DD_SF9.txt
+        #julia threeplsp.jl --inst instances/N200T30/N200T30P1W5SD_SF9.dat --form ${form} --capacity ${cap} --balanced ${bal} --maxtimerf ${maxt} --fixsizerf ${fixsize} --freeintervalrf ${freeint} >> report/bal${bal}_cap${cap}_form${form}_fixsize${fixsize}_freeint${freeint}_N200T30P1W5SD_SF9.txt
+        #julia threeplsp.jl --inst instances/N200T30/N200T30P1W15DD_DF1.dat --form ${form} --capacity ${cap} --balanced ${bal} --maxtimerf ${maxt} --fixsizerf ${fixsize} --freeintervalrf ${freeint} >> report/bal${bal}_cap${cap}_form${form}_fixsize${fixsize}_freeint${freeint}_N200T30P1W15DD_DF1.txt
+
+        mv saida.txt result/bal${bal}_cap${cap}_form${form}_fixsize${fixsize}_freeint${freeint}.csv
+
+      done
+    done
+  done
+done

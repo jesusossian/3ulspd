@@ -1,0 +1,12 @@
+1) instalar o PackageCompiler:
+julia> using Pkg
+julia> Pkg.add("PackageCompiler")
+
+2) importa o PackageCompiler:
+julia> using PackageCompiler
+
+3)Criando um arquivo sysimage. Definir os pacotes a serem utilizados e código a ser compilado.
+julia> create_sysimage([:JuMP,:Gurobi,:CPLEX,:LinearAlgebra,:MathProgBase,:Random]; sysimage_path="sysimage.dylib", precompile_execution_file="threeplsp.jl")
+
+4) Executar o código no terminal:
+$ julia --sysimage sysimage.dylib -q threeplsp.jl

@@ -1,0 +1,18 @@
+#!/bin/bash
+model=esn
+version=cap175
+style=unbal # unbal bal
+
+echo "instance;bestbound;opt;time;nodes" >> saida.txt
+julia threeplsp.jl --inst instances/N50T15/N50T15P1W15DD_SF4.dat --form ${model} >> report/${version}_${style}_${model}_pre_N50T15P1W15DD_SF4.txt
+julia threeplsp.jl --inst instances/N50T15/N50T15P1W20SD_SF1.dat --form ${model} >> report/${version}_${style}_${model}_pre_N50T15P1W20SD_SF1.txt
+julia threeplsp.jl --inst instances/N50T30/N50T30P1W5SD_DF3.dat --form ${model} >> report/${version}_${style}_${model}_pre_N50T30P1W5SD_DF3.txt
+julia threeplsp.jl --inst instances/N50T30/N50T30P1W10DD_DF10.dat --form ${model} >> report/${version}_${style}_${model}_pre_N50T30P1W10DD_DF10.txt
+julia threeplsp.jl --inst instances/N100T15/N100T15P1W5DD_SF5.dat --form ${model} >> report/${version}_${style}_${model}_pre_N100T15P1W5DD_SF5.txt
+julia threeplsp.jl --inst instances/N100T15/N100T15P1W10SD_SF9.dat --form ${model} >> report/${version}_${style}_${model}_pre_N100T15P1W10SD_SF9.txt
+julia threeplsp.jl --inst instances/N100T30/N100T30P1W10SD_DF6.dat --form ${model} >> report/${version}_${style}_${model}_pre_N100T30P1W10SD_DF6.txt
+julia threeplsp.jl --inst instances/N100T30/N100T30P1W20DD_SF9.dat --form ${model} >> report/${version}_${style}_${model}_pre_N100T30P1W20DD_SF9.txt
+julia threeplsp.jl --inst instances/N200T30/N200T30P1W5SD_SF9.dat --form ${model} >> report/${version}_${style}_${model}_pre_N200T30P1W5SD_SF9.txt
+julia threeplsp.jl --inst instances/N200T30/N200T30P1W15DD_DF1.dat --form ${model} >> report/${version}_${style}_${model}_pre_N200T30P1W15DD_DF1.txt
+
+mv saida.txt result/pre_${version}_${style}_${model}.txt

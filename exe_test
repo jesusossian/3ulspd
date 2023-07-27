@@ -1,0 +1,39 @@
+#!/bin/bash
+bal=0 
+form=esls # std mc echelon esn estp esls 3level partialmc e3level rounding dpheur 
+V=DD_SF
+#cap \in {0.00, 1.50, 1.75, 2.00}
+#capw \in { 0.00, 1.50, 1.75, 2.00}
+#capr \in { 0.00, 1.50, 1.75, 2.00}
+#T \in { 15, 30}
+P=1
+#W \in {5, 10, 15, 20}
+#N \in {50, 100, 200}
+#id \in {1, ..., 10}
+
+#################
+
+for cap in 1.75
+do
+	for capw in 0.00
+	do
+		for capr in 0.00
+		do			
+			for T in 15 #30
+			do
+				for W in 5 10 15 20 #5 10 15 20
+				do
+					for N in 50 #50 100 200
+					do
+						echo "instance;form;cap;capw;capr;T;W;R;bestbound;bestsol;gap;time;nodes;opt" >> saida.txt
+						for id in 1 2 3 4 5
+						do
+							julia --sysimage sysimage.dylib -q threeplsp.jl --inst instances/N${N}T${T}/N${N}T${T}P${P}W${W}${V}${id}.dat --form ${form} --balanced ${bal} --capacity ${cap} --capacityw ${capw} --capacityr ${capr} >> report/bal${bal}_form${form}_cap${cap}_capw${capw}_capr${capr}_N${N}T${T}P${P}W${W}${V}${id}.txt
+						done
+						mv saida.txt result/bal${bal}_form${form}_cap${cap}_capw${capw}_capr${capr}_T${T}_W${W}_N${N}.csv
+					done
+				done
+			done
+		done
+	done
+done
